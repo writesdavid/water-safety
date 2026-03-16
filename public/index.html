@@ -6,8 +6,6 @@
   <title>Water Safety — Open Primitive</title>
   <link rel="stylesheet" href="https://openprimitive.com/primitive.css" />
   <style>
-    body { background: #060810; }
-
     #results { display: none; }
     #results.active { display: block; }
 
@@ -27,7 +25,7 @@
       transition: background 0.15s;
     }
 
-    .system-header:hover { background: rgba(255,255,255,0.03); }
+    .system-header:hover { background: var(--bg-hover); }
 
     .system-name {
       font-size: 0.95rem;
@@ -98,7 +96,7 @@
     }
 
     .violation-item.health-resolved {
-      background: rgba(255,255,255,0.02);
+      background: var(--bg-card);
       border: 1px solid var(--border);
     }
 
@@ -143,8 +141,6 @@
   </style>
 </head>
 <body>
-
-<div class="op-scan"></div>
 
 <div class="op-page">
 
