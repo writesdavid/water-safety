@@ -4,242 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Water Safety — Open Primitive</title>
+  <link rel="stylesheet" href="https://openprimitive.com/primitive.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #060810; }
 
-    :root {
-      --bg: #090c10;
-      --surface: #10141c;
-      --surface2: #141924;
-      --border: #1c2230;
-      --border2: #232d3f;
-      --text: #e2e8f0;
-      --text-muted: #64748b;
-      --text-dim: #94a3b8;
-      --accent: #3b82f6;
-      --accent-dim: #1d4ed8;
-      --red: #ef4444;
-      --red-bg: #1a0a0a;
-      --red-border: #7f1d1d;
-      --yellow: #eab308;
-      --yellow-bg: #1a1500;
-      --yellow-border: #713f12;
-      --green: #22c55e;
-      --green-bg: #071a0d;
-      --green-border: #14532d;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --mono: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* Layout */
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Header */
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 40px 0 32px;
-      margin-bottom: 40px;
-    }
-
-    .site-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .site-label a {
-      color: var(--text-muted);
-    }
-
-    .site-label a:hover {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .tagline {
-      font-size: 17px;
-      color: var(--text-dim);
-      margin-bottom: 16px;
-    }
-
-    .description {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 560px;
-      line-height: 1.65;
-    }
-
-    /* Search */
-    .search-section {
-      margin-bottom: 40px;
-    }
-
-    .search-row {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .input-wrap {
-      flex: 1;
-      max-width: 220px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      color: var(--text);
-      font-family: var(--mono);
-      font-size: 16px;
-      padding: 10px 14px;
-      border-radius: 6px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    input[type="text"]:focus {
-      border-color: var(--accent);
-    }
-
-    input[type="text"].error {
-      border-color: var(--red);
-    }
-
-    .input-error {
-      font-size: 12px;
-      color: var(--red);
-      margin-top: 5px;
-    }
-
-    button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      font-family: var(--font);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s;
-    }
-
-    button:hover { background: var(--accent-dim); }
-    button:disabled { background: var(--border2); cursor: not-allowed; color: var(--text-muted); }
-
-    /* Loading */
-    .loading {
-      display: none;
-      padding: 32px 0;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    .loading.active { display: block; }
-
-    .spinner {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid var(--border2);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Results */
     #results { display: none; }
     #results.active { display: block; }
 
-    .results-header {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    /* System card */
     .system-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 0.75rem;
       overflow: hidden;
     }
 
     .system-header {
-      padding: 18px 20px;
+      padding: 1rem 1.25rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
+      gap: 1rem;
       user-select: none;
+      transition: background 0.15s;
     }
 
-    .system-header:hover {
-      background: var(--surface2);
-    }
+    .system-header:hover { background: rgba(255,255,255,0.03); }
 
     .system-name {
-      font-size: 16px;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-bottom: 0.3rem;
     }
 
     .system-meta {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--mono);
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .system-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      gap: 0.6rem;
     }
 
     .expand-icon {
-      color: var(--text-muted);
-      font-size: 18px;
+      color: var(--dim);
+      font-size: 1.1rem;
       flex-shrink: 0;
       transition: transform 0.2s;
       line-height: 1;
@@ -249,7 +57,6 @@
       transform: rotate(180deg);
     }
 
-    /* Violations panel */
     .violations-panel {
       display: none;
       border-top: 1px solid var(--border);
@@ -260,229 +67,133 @@
     }
 
     .violations-loading {
-      padding: 24px 20px;
-      color: var(--text-muted);
-      font-size: 14px;
+      padding: 1.25rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .violations-content {
-      padding: 20px;
+      padding: 1.25rem;
     }
 
-    /* Violation section */
-    .violation-section {
-      margin-bottom: 24px;
-    }
-
+    .violation-section { margin-bottom: 1.5rem; }
     .violation-section:last-child { margin-bottom: 0; }
 
-    .violation-section-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .violation-section-title.health { color: var(--red); }
-    .violation-section-title.monitoring { color: var(--yellow); }
-    .violation-section-title.clean { color: var(--green); }
-
-    /* No violations state */
-    .no-violations {
-      background: var(--green-bg);
-      border: 1px solid var(--green-border);
-      color: var(--green);
-      border-radius: 6px;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    /* Violation item */
     .violation-item {
       border-radius: 6px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-      font-size: 13px;
+      padding: 0.75rem 0.9rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.82rem;
       line-height: 1.5;
     }
 
     .violation-item:last-child { margin-bottom: 0; }
 
     .violation-item.health-open {
-      background: var(--red-bg);
-      border: 1px solid var(--red-border);
+      background: rgba(255,90,90,0.07);
+      border: 1px solid rgba(255,90,90,0.25);
     }
 
     .violation-item.health-resolved {
-      background: var(--surface2);
+      background: rgba(255,255,255,0.02);
       border: 1px solid var(--border);
     }
 
     .violation-item.monitoring-item {
-      background: var(--yellow-bg);
-      border: 1px solid var(--yellow-border);
+      background: rgba(255,184,77,0.06);
+      border: 1px solid rgba(255,184,77,0.2);
     }
 
     .violation-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 4px;
+      gap: 0.6rem;
+      margin-bottom: 0.25rem;
     }
 
     .contaminant-name {
       font-weight: 600;
       color: var(--text);
-    }
-
-    .violation-status-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-
-    .badge-open {
-      background: var(--red);
-      color: #fff;
-    }
-
-    .badge-resolved {
-      background: var(--border2);
-      color: var(--text-muted);
-    }
-
-    .badge-monitoring {
-      background: var(--yellow-border);
-      color: var(--yellow);
+      font-size: 0.88rem;
     }
 
     .violation-detail {
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    /* Summary badge on collapsed cards */
-    .system-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 3px;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-    }
-
-    .badge-danger { background: rgba(239,68,68,0.15); color: var(--red); }
-    .badge-warning { background: rgba(234,179,8,0.15); color: var(--yellow); }
-    .badge-safe { background: rgba(34,197,94,0.15); color: var(--green); }
-    .badge-unknown { background: var(--border2); color: var(--text-muted); }
-
-    /* Error state */
-    .error-box {
-      background: var(--red-bg);
-      border: 1px solid var(--red-border);
-      color: var(--red);
-      border-radius: 6px;
-      padding: 14px 16px;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .empty-state {
-      color: var(--text-muted);
-      font-size: 14px;
-      padding: 20px 0;
-    }
-
-    /* PWSID */
-    .pwsid-code {
+      color: var(--muted);
+      font-size: 0.75rem;
       font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-muted);
     }
 
-    /* Divider */
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 20px 0;
+    .system-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
-      padding: 28px 0 40px;
-    }
-
-    .footer-source {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .footer-disclaimer {
-      font-size: 12px;
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
-
-    /* Responsive */
-    @media (max-width: 520px) {
-      header { padding: 28px 0 24px; }
-      h1 { font-size: 22px; }
-      .tagline { font-size: 15px; }
-      .search-row { flex-direction: column; }
-      .input-wrap { max-width: 100%; }
-      button { width: 100%; }
+    .input-error {
+      font-size: 0.75rem;
+      color: var(--danger);
+      margin-top: 0.3rem;
+      font-family: var(--mono);
     }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <div class="site-label"><a href="#">Open Primitive</a></div>
-    <h1>Water Safety</h1>
-    <p class="tagline">What's in the water at your address.</p>
-    <p class="description">The EPA tracks every violation at every public water system in the US. This shows you what they found.</p>
-  </header>
+<div class="op-scan"></div>
 
-  <section class="search-section">
-    <div class="search-row">
-      <div class="input-wrap">
-        <input
-          type="text"
-          id="zip-input"
-          placeholder="ZIP code"
-          maxlength="5"
-          inputmode="numeric"
-          autocomplete="postal-code"
-          aria-label="ZIP code"
-        />
-        <div class="input-error" id="zip-error" style="display:none"></div>
-      </div>
-      <button id="search-btn" onclick="doSearch()">Search</button>
+<div class="op-page">
+
+  <div class="op-header">
+    <a class="op-wordmark" href="https://openprimitive.com">OPEN PRIMITIVE</a>
+    <div class="op-header-right">
+      <a class="op-back" href="https://openprimitive.com">All Primitives</a>
     </div>
-  </section>
+  </div>
 
-  <div class="loading" id="loading">
-    <span class="spinner"></span> Fetching water system data from EPA...
+  <div class="op-hero">
+    <div class="op-eyebrow">Water Safety</div>
+    <h1>What's in the water at your address.</h1>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.5rem;">The EPA tracks every violation at every public water system in the US. This shows you what they found.</p>
+  </div>
+
+  <div class="op-label">Search by ZIP Code</div>
+  <div class="op-search-row" style="margin-bottom:0.4rem;">
+    <input
+      type="text"
+      class="op-input"
+      id="zip-input"
+      placeholder="5-digit ZIP code"
+      maxlength="5"
+      inputmode="numeric"
+      autocomplete="postal-code"
+      aria-label="ZIP code"
+      style="max-width:180px;"
+    />
+    <button class="op-btn" id="search-btn" onclick="doSearch()">Search</button>
+  </div>
+  <div class="input-error" id="zip-error" style="display:none;margin-bottom:1.5rem;"></div>
+
+  <div class="op-loading" id="loading" style="display:none;">
+    <div class="op-spinner"></div>
+    <span>Fetching water system data from EPA...</span>
   </div>
 
   <div id="results">
     <div id="results-inner"></div>
   </div>
 
-  <footer>
-    <div class="footer-source">Data: EPA Safe Drinking Water Information System &middot; <a href="https://www.epa.gov/ground-water-and-drinking-water/safe-drinking-water-information-system-sdwis-federal-reporting" target="_blank" rel="noopener">epa.gov</a> &middot; Last updated by EPA quarterly</div>
-    <div class="footer-disclaimer">This reflects EPA records. Contact your water utility for current test results.</div>
+  <footer class="op-footer">
+    <div class="op-footer-text">
+      Data: EPA Safe Drinking Water Information System &middot; <a href="https://www.epa.gov/ground-water-and-drinking-water/safe-drinking-water-information-system-sdwis-federal-reporting" target="_blank" rel="noopener">epa.gov</a> &middot; Last updated by EPA quarterly
+    </div>
+    <div class="op-footer-text" style="margin-top:0.35rem;">
+      This reflects EPA records. Contact your water utility for current test results.
+    </div>
   </footer>
 
 </div>
@@ -521,17 +232,17 @@
     zipInput.classList.remove('error');
     zipError.style.display = 'none';
     searchBtn.disabled = true;
-    loading.classList.add('active');
+    loading.style.display = 'flex';
     results.classList.remove('active');
     resultsInner.innerHTML = '';
 
     try {
       const res = await fetch(`/api/search?zip=${encodeURIComponent(zip)}`);
       const data = await res.json();
-      loading.classList.remove('active');
+      loading.style.display = 'none';
       renderResults(data, zip);
     } catch (err) {
-      loading.classList.remove('active');
+      loading.style.display = 'none';
       renderError('Could not connect to the EPA data service. Please try again.');
     } finally {
       searchBtn.disabled = false;
@@ -539,26 +250,26 @@
   }
 
   function renderError(msg) {
-    resultsInner.innerHTML = `<div class="error-box">${escHtml(msg)}</div>`;
+    resultsInner.innerHTML = `<div class="op-error">${escHtml(msg)}</div>`;
     results.classList.add('active');
   }
 
   function renderResults(data, zip) {
     if (data.error && (!data.systems || data.systems.length === 0)) {
-      resultsInner.innerHTML = `<div class="error-box">${escHtml(data.error)}</div>`;
+      resultsInner.innerHTML = `<div class="op-error">${escHtml(data.error)}</div>`;
       results.classList.add('active');
       return;
     }
 
     const systems = data.systems || [];
     if (systems.length === 0) {
-      resultsInner.innerHTML = `<p class="empty-state">No public water systems found for ZIP code ${escHtml(zip)}. This may be a rural area served by private wells, or this ZIP may span multiple counties. Try an adjacent ZIP code.</p>`;
+      resultsInner.innerHTML = `<div class="op-empty"><div class="op-empty-label">No public water systems found for ZIP code ${escHtml(zip)}. This may be a rural area served by private wells, or this ZIP may span multiple counties. Try an adjacent ZIP code.</div></div>`;
       results.classList.add('active');
       return;
     }
 
     const count = systems.length;
-    const header = `<div class="results-header">${count} water system${count !== 1 ? 's' : ''} serving ${escHtml(zip)}</div>`;
+    const header = `<div class="op-label" style="margin-bottom:1rem;">${count} water system${count !== 1 ? 's' : ''} serving ${escHtml(zip)}</div>`;
     const cards = systems.map(s => renderSystemCard(s)).join('');
     resultsInner.innerHTML = header + cards;
     results.classList.add('active');
@@ -572,7 +283,7 @@
     const location = [system.city, system.state].filter(Boolean).join(', ');
 
     return `
-      <div class="system-card" id="${escHtml(id)}" data-pwsid="${escHtml(system.pwsid)}">
+      <div class="op-card system-card" id="${escHtml(id)}" data-pwsid="${escHtml(system.pwsid)}">
         <div class="system-header" onclick="toggleSystem('${escHtml(system.pwsid)}')">
           <div>
             <div class="system-name">${escHtml(system.name)}</div>
@@ -580,17 +291,18 @@
               <span>${escHtml(popStr)}</span>
               ${location ? `<span>${escHtml(location)}</span>` : ''}
               <span>${escHtml(system.typeName)}</span>
-              <span class="pwsid-code">${escHtml(system.pwsid)}</span>
+              <span style="color:var(--dim)">${escHtml(system.pwsid)}</span>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <span class="system-badge badge-unknown" id="badge-${escHtml(system.pwsid)}">...</span>
+          <div class="system-right">
+            <span class="op-badge dim" id="badge-${escHtml(system.pwsid)}">...</span>
             <span class="expand-icon">&#8964;</span>
           </div>
         </div>
         <div class="violations-panel" id="panel-${escHtml(system.pwsid)}">
           <div class="violations-loading" id="vloading-${escHtml(system.pwsid)}">
-            <span class="spinner"></span> Loading violation history...
+            <div class="op-spinner" style="width:14px;height:14px;border-width:2px;"></div>
+            Loading violation history...
           </div>
           <div class="violations-content" id="vcontent-${escHtml(system.pwsid)}" style="display:none"></div>
         </div>
@@ -623,7 +335,7 @@
       renderViolations(pwsid, data);
     } catch (err) {
       const vloading = document.getElementById('vloading-' + pwsid);
-      if (vloading) vloading.innerHTML = '<span style="color:var(--red)">Failed to load violation data.</span>';
+      if (vloading) vloading.innerHTML = '<span style="color:var(--danger)">Failed to load violation data.</span>';
     }
   }
 
@@ -638,7 +350,7 @@
     vcontent.style.display = 'block';
 
     if (data.error) {
-      vcontent.innerHTML = `<div class="error-box">${escHtml(data.error)}</div>`;
+      vcontent.innerHTML = `<div class="op-error">${escHtml(data.error)}</div>`;
       return;
     }
 
@@ -648,13 +360,13 @@
     // Update badge
     const openHealth = hv.filter(v => v.isOpen);
     if (openHealth.length > 0) {
-      badge.className = 'system-badge badge-danger';
+      badge.className = 'op-badge danger';
       badge.textContent = openHealth.length + ' open health violation' + (openHealth.length !== 1 ? 's' : '');
     } else if (hv.length > 0) {
-      badge.className = 'system-badge badge-warning';
+      badge.className = 'op-badge warn';
       badge.textContent = hv.length + ' past health violation' + (hv.length !== 1 ? 's' : '');
     } else {
-      badge.className = 'system-badge badge-safe';
+      badge.className = 'op-badge ok';
       badge.textContent = 'No health violations';
     }
 
@@ -662,10 +374,10 @@
 
     // Health-based section
     html += '<div class="violation-section">';
-    html += '<div class="violation-section-title health">Health-Based Violations</div>';
+    html += '<div class="op-label" style="margin-bottom:0.75rem;color:var(--danger)">Health-Based Violations</div>';
 
     if (hv.length === 0) {
-      html += '<div class="no-violations">No health-based violations on record.</div>';
+      html += '<div class="op-notice" style="color:var(--ok);border-color:rgba(74,222,128,0.2);background:rgba(74,222,128,0.05);">No health-based violations on record.</div>';
     } else {
       // Show open first, then resolved
       const sorted = [...hv].sort((a, b) => (b.isOpen ? 1 : 0) - (a.isOpen ? 1 : 0));
@@ -677,20 +389,20 @@
 
     // Monitoring section
     if (mv.length > 0) {
-      html += '<div class="divider"></div>';
+      html += '<hr class="op-divider" />';
       html += '<div class="violation-section">';
-      html += '<div class="violation-section-title monitoring">Monitoring &amp; Reporting Violations</div>';
+      html += '<div class="op-label" style="margin-bottom:0.75rem;color:var(--warn)">Monitoring &amp; Reporting Violations</div>';
       mv.slice(0, 20).forEach(v => {
         html += renderViolationItem(v, 'monitoring');
       });
       if (mv.length > 20) {
-        html += `<div style="font-size:12px;color:var(--text-muted);margin-top:8px;">+ ${mv.length - 20} more monitoring violations not shown.</div>`;
+        html += `<div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;font-family:var(--mono);">+ ${mv.length - 20} more monitoring violations not shown.</div>`;
       }
       html += '</div>';
     }
 
     if (hv.length === 0 && mv.length === 0) {
-      html = '<div class="no-violations">No violations on record for this water system.</div>';
+      html = '<div class="op-notice" style="color:var(--ok);border-color:rgba(74,222,128,0.2);background:rgba(74,222,128,0.05);">No violations on record for this water system.</div>';
     }
 
     vcontent.innerHTML = html;
@@ -702,13 +414,11 @@
       ? (v.isOpen ? 'violation-item health-open' : 'violation-item health-resolved')
       : 'violation-item monitoring-item';
 
-    const badgeClass = isHealth
-      ? (v.isOpen ? 'violation-status-badge badge-open' : 'violation-status-badge badge-resolved')
-      : 'violation-status-badge badge-monitoring';
-
-    const statusText = isHealth
-      ? (v.isOpen ? 'Open' : 'Resolved')
-      : 'Monitoring';
+    const statusBadge = isHealth
+      ? (v.isOpen
+          ? '<span class="op-badge danger">Open</span>'
+          : '<span class="op-badge dim">Resolved</span>')
+      : '<span class="op-badge warn">Monitoring</span>';
 
     const contaminant = v.contaminantName || 'Unknown contaminant';
     const violationType = v.violationTypeName || v.violationCategoryCode || '';
@@ -718,7 +428,7 @@
       <div class="${itemClass}">
         <div class="violation-top">
           <span class="contaminant-name">${escHtml(contaminant)}</span>
-          <span class="${badgeClass}">${statusText}</span>
+          ${statusBadge}
         </div>
         <div class="violation-detail">
           ${violationType ? escHtml(violationType) + ' &middot; ' : ''}${dateRange}
