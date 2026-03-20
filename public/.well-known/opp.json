@@ -1,0 +1,34 @@
+{
+  "opp_version": "0.1",
+  "name": "Water Safety",
+  "description": "EPA SDWIS drinking water system violations by ZIP code and PWSID.",
+  "base_url": "https://water.openprimitive.com",
+  "endpoints": [
+    {
+      "path": "/api/search",
+      "method": "GET",
+      "parameters": {
+        "zip": "5-digit US ZIP code"
+      },
+      "description": "Search water systems by ZIP code."
+    },
+    {
+      "path": "/api/system/:pwsid",
+      "method": "GET",
+      "parameters": {
+        "pwsid": "Public Water System ID (9-12 alphanumeric characters)"
+      },
+      "description": "Get violation history for a specific water system."
+    }
+  ],
+  "source": {
+    "name": "EPA Safe Drinking Water Information System (SDWIS)",
+    "url": "https://enviro.epa.gov",
+    "license": "US Government Public Domain"
+  },
+  "confidence": {
+    "completeness": 0.70,
+    "methodology": "mandatory-but-delayed",
+    "note": "EPA SDWIS depends on local utility testing compliance. Small systems under-report."
+  }
+}

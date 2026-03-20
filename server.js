@@ -267,7 +267,22 @@ app.get('/api/search', async (req, res) => {
   }
   try {
     const data = await searchByZip(zip);
-    return res.json(data);
+    const systems = data.systems || [];
+    return res.json({
+      ...data,
+      source_url: 'https://enviro.epa.gov',
+      freshness: new Date().toISOString(),
+      confidence: {
+        completeness: 0.70,
+        methodology: 'mandatory-but-delayed',
+        note: 'EPA SDWIS depends on local utility testing compliance. Small systems under-report.',
+      },
+      citations: {
+        statement: `According to EPA SDWIS, ${systems.length} water system(s) found for ZIP ${zip}`,
+        source_url: 'https://enviro.epa.gov',
+        license: 'US Government Public Domain',
+      },
+    });
   } catch (err) {
     console.error('Search error:', err.message);
     return res.status(500).json({ error: 'Failed to fetch water system data.' });
@@ -281,7 +296,22 @@ app.get('/api/system/:pwsid', async (req, res) => {
   }
   try {
     const data = await getSystemViolations(pwsid);
-    return res.json(data);
+    const totalViolations = data.violations ? data.violations.total : 0;
+    return res.json({
+      ...data,
+      source_url: 'https://enviro.epa.gov',
+      freshness: new Date().toISOString(),
+      confidence: {
+        completeness: 0.70,
+        methodology: 'mandatory-but-delayed',
+        note: 'EPA SDWIS depends on local utility testing compliance. Small systems under-report.',
+      },
+      citations: {
+        statement: `According to EPA SDWIS, ${totalViolations} violation(s) found for system ${pwsid}`,
+        source_url: 'https://enviro.epa.gov',
+        license: 'US Government Public Domain',
+      },
+    });
   } catch (err) {
     console.error('System error:', err.message);
     return res.status(500).json({ error: 'Failed to fetch system data.' });

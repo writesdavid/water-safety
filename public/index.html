@@ -91,8 +91,8 @@
     .violation-item:last-child { margin-bottom: 0; }
 
     .violation-item.health-open {
-      background: rgba(255,90,90,0.07);
-      border: 1px solid rgba(255,90,90,0.25);
+      background: rgba(191,32,32,0.07);
+      border: 1px solid rgba(191,32,32,0.25);
     }
 
     .violation-item.health-resolved {
@@ -101,8 +101,8 @@
     }
 
     .violation-item.monitoring-item {
-      background: rgba(255,184,77,0.06);
-      border: 1px solid rgba(255,184,77,0.2);
+      background: rgba(154,102,16,0.06);
+      border: 1px solid rgba(154,102,16,0.2);
     }
 
     .violation-top {
@@ -410,7 +410,7 @@
     html += '<div class="op-label" style="margin-bottom:0.75rem;color:var(--danger)">Health-Based Violations</div>';
 
     if (hv.length === 0) {
-      html += '<div class="op-notice" style="color:var(--ok);border-color:rgba(74,222,128,0.2);background:rgba(74,222,128,0.05);">No health-based violations on record.</div>';
+      html += '<div class="op-notice" style="color:var(--ok);border-color:rgba(26,107,64,0.2);background:rgba(26,107,64,0.05);">No health-based violations on record.</div>';
     } else {
       // Show open first, then resolved
       const sorted = [...hv].sort((a, b) => (b.isOpen ? 1 : 0) - (a.isOpen ? 1 : 0));
@@ -435,7 +435,7 @@
     }
 
     if (hv.length === 0 && mv.length === 0) {
-      html = '<div class="op-notice" style="color:var(--ok);border-color:rgba(74,222,128,0.2);background:rgba(74,222,128,0.05);">No violations on record for this water system.</div>';
+      html = '<div class="op-notice" style="color:var(--ok);border-color:rgba(26,107,64,0.2);background:rgba(26,107,64,0.05);">No violations on record for this water system.</div>';
     }
 
     vcontent.innerHTML = html;
